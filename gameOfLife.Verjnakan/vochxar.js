@@ -1,7 +1,6 @@
-class Vochxar{
+class Vochxar extends LivingCreature{
     constructor(x,y){
-        this.x = x 
-        this.y = y
+        super(x,y)
         this.energy = 16
         this.directions = [];
     }

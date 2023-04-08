@@ -1,7 +1,6 @@
-class Gayl {
+class Gayl extends LivingCreature{
     constructor(x, y) {
-        this.x = x
-        this.y = y
+        super(x,y)
         this.energy = 18
         this.directions = [];
     }

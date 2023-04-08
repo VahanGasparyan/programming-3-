@@ -1,7 +1,6 @@
-class Pajarnik {
+class Pajarnik extends LivingCreature {
     constructor(x, y) {
-        this.x = x
-        this.y = y
+        super(x,y)
         this.kyanq = 30
         this.directions = [];
     }
@@ -19,7 +18,7 @@ class Pajarnik {
         ];
     }
 
-    chooseCell(char, char1,) {
+    chooseCell(char, char1) {
         this.getNewCoordinates()
         let found = []
 
