@@ -1,4 +1,5 @@
-class Krak extends LivingCreature{
+let LivingCreature = require("./LivingCreature")
+ module.export =class Krak extends LivingCreature{
     constructor(x, y) {
         super(x,y)
         this.energy = 10

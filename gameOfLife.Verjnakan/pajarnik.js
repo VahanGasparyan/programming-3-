@@ -1,4 +1,5 @@
-class Pajarnik extends LivingCreature {
+let LivingCreature = require("./LivingCreature")
+  module.export = class Pajarnik extends LivingCreature {
     constructor(x, y) {
         super(x,y)
         this.kyanq = 30
