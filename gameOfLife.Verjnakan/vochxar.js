@@ -1,5 +1,5 @@
 let LivingCreature = require("./LivingCreature")
-module.export = class Vochxar extends LivingCreature{
+module.exports = class Vochxar extends LivingCreature{
     constructor(x,y){
         super(x,y)
         this.energy = 16

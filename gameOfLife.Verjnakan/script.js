@@ -1,4 +1,4 @@
-
+var socket = io()
 let side = 30
 ///օբյեկտներ պահելու զանգվածներ
 
@@ -6,12 +6,14 @@ let side = 30
 
 function setup() {
         
-        createCanvas(30, matrix.length * side)
+        createCanvas(30 * side, 30 * side)
+        background("gray")
         }
         
 
 
-function draw() {
+function changeColor(matrix) {
+        console.log(matrix);
         for (let y = 0; y < matrix.length; y++) {
                 for (let x = 0; x < matrix[y].length; x++) {
                         var toBot = side - side * 0.2
@@ -68,44 +70,9 @@ function draw() {
 
 
 
-        for (let i in grassArr) {
-                grassArr[i].mul()
-        }
-
-
-        for (let i in grassEaterArr) {
-                grassEaterArr[i].eat()
-        }
-
-
-
-        for (let i in predatorArr) {
-                predatorArr[i].eat()
-        }
-
-
-        for (let i in vochxarArr) {
-                vochxarArr[i].eat()
-        }
-
-
-        for (let i in gaylArr) {
-                gaylArr[i].eat()
-        }
-
-        for (let i in krakArr) {
-                krakArr[i].varel()
-        }
-
-        for (let i in pajarnikArr) {
-                pajarnikArr[i].marel()
-        }
-
-        for (let i in bombArr) {
-                bombArr[i].traqacnel()
-        }
-
-
+      
 
 
 }
+
+socket.on('send matrix',changeColor)

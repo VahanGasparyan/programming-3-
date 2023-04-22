@@ -111,7 +111,7 @@ function matrixGenerator(matrixSize, grass, grassEater, predator, vochxar, gayl,
 }
 
 matrix = matrixGenerator(30, 20, 13, 4, 7, 5, 5, 10, 7, 1)
-io.sockets.emit('send matrix'.matrix)
+io.sockets.emit('send matrix',matrix)
 
 grassArr = []
 grassEaterArr = []
@@ -177,5 +177,51 @@ function createObject() {
             }
         }
     }
+    io.sockets.emit('send matrix',matrix)
 }
-io.sockets.emit('send matrix'.matrix)
+
+function game() {
+    for (let i in grassArr) {
+        grassArr[i].mul()
+    }
+
+
+    for (let i in grassEaterArr) {
+        grassEaterArr[i].eat()
+    }
+
+
+
+    for (let i in predatorArr) {
+        predatorArr[i].eat()
+    }
+
+
+    for (let i in vochxarArr) {
+        vochxarArr[i].eat()
+    }
+
+    for (let i in gaylArr) {
+        gaylArr[i].eat()
+    }
+
+    for (let i in krakArr) {
+        krakArr[i].varel()
+    }
+
+    for (let i in pajarnikArr) {
+        pajarnikArr[i].marel()
+    }
+
+    for (let i in bombArr) {
+        bombArr[i].traqacnel()
+    }
+    io.sockets.emit('send matrix',matrix)
+
+}
+
+setInterval(game,300)
+
+io.on('connection',function(){
+    createObject()
+})
