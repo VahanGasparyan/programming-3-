@@ -47,7 +47,7 @@ let LivingCreature = require("./LivingCreature")
 
     mul() {
         let emptyCell = this.chooseCell(0)
-        let newCell = emptyCell(Math.floor(Math.random() * emptyCell.length))
+        let newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)]
 
         if (newCell) {
             let newX = newCell[0]
@@ -66,7 +66,7 @@ let LivingCreature = require("./LivingCreature")
 
     marel() {
         let emptyCell = this.chooseCell(6, 8)
-        let newCell = emptyCell(Math.floor(Math.random() * emptyCell.length))
+        let newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)]
 
         if (newCell) {
             this.kyanq += 5
@@ -108,7 +108,7 @@ let LivingCreature = require("./LivingCreature")
 
         move() {
             let emptyCell = this.chooseCell(0)
-            let newCell = emptyCell(Math.floor(Math.random() * emptyCell.length))
+            let newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)]
 
             if (newCell) {
                 let newX = newCell[0]

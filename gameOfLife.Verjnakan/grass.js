@@ -10,7 +10,7 @@ let LivingCreature = require("./LivingCreature")
     mul() {
         this.multiply++
         let emptyCell = this.chooseCell(0)
-        let newCell = emptyCell(Math.floor(Math.random() * emptyCell.length))
+        let newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)]
 
         if (newCell && this.multiply >= 5) {
             let newX = newCell[0]
