@@ -225,3 +225,16 @@ setInterval(game,300)
 io.on('connection',function(){
     createObject()
 })
+
+function AddGrass() {
+    for (var i = 0; i < 7; i++) {
+        var x = Math.floor(Math.random() * matrix[0].length)
+        var y = Math.floor(Math.random() * matrix.length)
+        if (matrix[y][x] == 0) {
+            matrix[y][x] = 1;
+            var gr = new Grass(x, y);
+            grassArr.push(gr);
+        }
+    }
+    io.sockets.emit("send matrix", matrix);
+}

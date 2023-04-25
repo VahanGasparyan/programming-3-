@@ -76,3 +76,7 @@ function changeColor(matrix) {
 }
 
 socket.on('send matrix',changeColor)
+
+function AddGrass(){
+        socket.emit("addGrass");
+    }
