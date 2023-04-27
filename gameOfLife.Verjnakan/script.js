@@ -80,3 +80,34 @@ socket.on('send matrix',changeColor)
 function AddGrass(){
         socket.emit("addGrass");
     }
+    function AddGrassEater(){
+        socket.emit("addGrassEater");
+    }
+    function AddPredator(){
+        socket.emit("addPredator");
+    }
+    function AddVochxar(){
+        socket.emit("addVochxar");
+    }
+    function AddGayl(){
+        socket.emit("addGayl");
+    }
+    function AddKrak(){
+        socket.emit("addKrak");
+    }
+    function AddPajarnik(){
+        socket.emit("addPajarnik");
+    
+    }
+    function AddTuyn(){
+        socket.emit("addTuyn");
+    
+    }
+    function AddXochndot(){
+        socket.emit("addXochndot");
+    
+    }
+    function AddBomb(){
+        socket.emit("addBomb");
+    
+    }
