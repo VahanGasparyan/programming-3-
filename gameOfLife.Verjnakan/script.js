@@ -5,19 +5,42 @@ let side = 30
 
 
 function setup() {
-        
+
         createCanvas(30 * side, 30 * side)
         background("gray")
-        }
-        
+}
 
+socket.on("Spring", function (data) {
+        weath = data;
+})
+socket.on("Summer", function (data) {
+        weath = data;
+})
+socket.on("Autumn", function (data) {
+        weath = data;
+})
+socket.on("Winter", function (data) {
+        weath = data;
+})
+
+var weath = "spring"
 
 function changeColor(matrix) {
-        console.log(matrix);
+
         for (let y = 0; y < matrix.length; y++) {
                 for (let x = 0; x < matrix[y].length; x++) {
                         var toBot = side - side * 0.2
                         textSize(toBot);
+                        //  if (matrix[y][x] = //) {
+                        //         if (weath == "spring") {
+                        //                 fill("55a630");
+                        //         } else if (weath == "summer") {
+                        //                 fill("ffd000");
+                        //         } else if (weath == "autumn") {
+                        //                 fill("a41623");
+                        //         } else if (weath == "winter") {
+                        //                 fill("#ABE0EB")
+                        //         }
                         if (matrix[y][x] == 1) {
                                 fill("green")
                                 rect(x * side, y * side, side, side)
@@ -58,56 +81,70 @@ function changeColor(matrix) {
                                 fill("#5c280a")
                                 rect(x * side, y * side, side, side)
                                 text('💣', x * side, y * side + toBot);
-                        } else {
-                                fill("gray")
-                                rect(x * side, y * side, side, side)
-                                text('', x * side, y * side + toBot);
+                        }  else {
+                                        fill("gray")
+                                        rect(x * side, y * side, side, side)
+                                        text('', x * side, y * side + toBot);
+                                }
                         }
-
-
+                        
                 }
         }
 
 
 
-      
 
 
-}
 
-socket.on('send matrix',changeColor)
+        
 
-function AddGrass(){
-        socket.emit("addGrass");
-    }
-    function AddGrassEater(){
-        socket.emit("addGrassEater");
-    }
-    function AddPredator(){
-        socket.emit("addPredator");
-    }
-    function AddVochxar(){
-        socket.emit("addVochxar");
-    }
-    function AddGayl(){
-        socket.emit("addGayl");
-    }
-    function AddKrak(){
-        socket.emit("addKrak");
-    }
-    function AddPajarnik(){
-        socket.emit("addPajarnik");
-    
-    }
-    function AddTuyn(){
-        socket.emit("addTuyn");
-    
-    }
-    function AddXochndot(){
-        socket.emit("addXochndot");
-    
-    }
-    function AddBomb(){
-        socket.emit("addBomb");
-    
-    }
+        socket.on('send matrix', changeColor)
+        function Spring() {
+                socket.emit("winter");
+        }
+        function Summer() {
+                socket.emit("summer");
+        }
+        function Autumn() {
+                socket.emit("autumn");
+        }
+        function Winter() {
+                socket.emit("winter");
+        }
+        function kill() {
+                socket.emit('killAll');
+        }
+        function AddGrass() {
+                socket.emit("addGrass");
+        }
+        function AddGrassEater() {
+                socket.emit("addGrassEater");
+        }
+        function AddPredator() {
+                socket.emit("addPredator");
+        }
+        function AddVochxar() {
+                socket.emit("addVochxar");
+        }
+        function AddGayl() {
+                socket.emit("addGayl");
+        }
+        function AddKrak() {
+                socket.emit("addKrak");
+        }
+        function AddPajarnik() {
+                socket.emit("addPajarnik");
+
+        }
+        function AddTuyn() {
+                socket.emit("addTuyn");
+
+        }
+        function AddXochndot() {
+                socket.emit("addXochndot");
+
+        }
+        function AddBomb() {
+                socket.emit("addBomb");
+
+        }

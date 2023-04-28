@@ -1,18 +1,18 @@
-var express = require('express')
+var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var fs = require('fs');
-const Bomb = require('./bomb');
-const Gayl = require('./gayl');
-const Grass = require('./grass');
-const GrassEater = require('./grassEater');
-const Krak = require('./krak');
-const Pajarnik = require('./pajarnik');
-const Predator = require('./predator');
-const Tuyn = require('./tuyn');
-const Vochxar = require('./vochxar');
-const Xochndot = require('./xochndot');
+// const Bomb = require('./bomb');
+// const Gayl = require('./gayl');
+// const Grass = require('./grass');
+// const GrassEater = require('./grassEater');
+// const Krak = require('./krak');
+// const Pajarnik = require('./pajarnik');
+// const Predator = require('./predator');
+// const Tuyn = require('./tuyn');
+// const Vochxar = require('./vochxar');
+// const Xochndot = require('./xochndot');
 
 app.use(express.static("."));
 
@@ -121,7 +121,7 @@ function matrixGenerator(matrixSize, grass, grassEater, predator, vochxar, gayl,
 }
 
 matrix = matrixGenerator(30, 20, 13, 4, 7, 5, 5, 10, 7, 1)
-io.sockets.emit('send matrix',matrix)
+io.sockets.emit('send matrix', matrix)
 
 grassArr = []
 grassEaterArr = []
@@ -136,16 +136,16 @@ bombArr = []
 
 
 
-Grass = require("./grass")
-GrassEater = require("./grassEater")
-Vochxar = require("./vochxar")
-Predator = require("./predator")
-Gayl = require("./gayl")
-Bomb = require("./bomb")
-Pajarnik = require("./pajarnik")
-Krak = require("./krak")
-Tuyn = require("./tuyn")
-Xochndot = require("./xochndot")
+const Grass = require("./Grass")
+const GrassEater = require("./GrassEater")
+const Vochxar = require("./Vochxar")
+const Predator = require("./Predator")
+const Gayl = require("./Gayl")
+const Bomb = require("./Bomb")
+const Pajarnik = require("./Pajarnik")
+const Krak = require("./Krak")
+const Tuyn = require("./Tuyn")
+const Xochndot = require("./Xochndot")
 
 
 function createObject() {
@@ -187,7 +187,7 @@ function createObject() {
             }
         }
     }
-    io.sockets.emit('send matrix',matrix)
+    io.sockets.emit('send matrix', matrix)
 }
 
 function game() {
@@ -226,18 +226,39 @@ function game() {
     for (let i in bombArr) {
         bombArr[i].traqacnel()
     }
-    io.sockets.emit('send matrix',matrix)
+    io.sockets.emit('send matrix', matrix)
 
 }
 
-setInterval(game,300)
+setInterval(game, 300)
 
-io.on('connection',function(){
+io.on('connection', function () {
     createObject()
 })
 
+//////////////////// Events ///////////////////////
 
-function KillAll() {
+var weath;
+
+function Spring(){
+    weath = "spring";
+    io.sockets.emit("Spring",weath);
+}
+function Summer(){
+    weath = "summer";
+    io.sockets.emit("Summer",weath);
+}
+function Autumn(){
+    weath = "autumn";
+    io.sockets.emit("Autumn",weath);
+}
+function Winter(){
+    weath = "winter";
+    io.sockets.emit("Winter",weath);
+}
+
+
+function kill() {
     grassArr = [];
     grassEaterArr = [];
     predatorArr = [];
@@ -255,47 +276,35 @@ function KillAll() {
     }
     io.sockets.emit("send matrix", matrix);
 }
+
 function AddGrass() {
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < matrix.length; i++) {
         var x = Math.floor(Math.random() * matrix[0].length)
         var y = Math.floor(Math.random() * matrix.length)
         if (matrix[y][x] == 0) {
             matrix[y][x] = 1;
             let grass = new Grass(x, y);
             grassArr.push(grass);
+
         }
     }
     io.sockets.emit("send matrix", matrix);
 }
 function AddGrassEater() {
-    let count = 0;
-    for (var i = 0; i < 50; i++) {
+    for (var i = 0; i < 30; i++) {
         var x = Math.floor(Math.random() * matrix[0].length)
         var y = Math.floor(Math.random() * matrix.length)
-        if (count < 7) {
-            if (i < 30) {
-                if (matrix[y][x] == 0) {
-                    count++;
-                    matrix[y][x] = 2;
-                    let grEat= new GrassEater(x, y);
-                    grassEaterArr.push(grEat);
-                }
-
-            } else if (i >= 30) {
-                if (matrix[y][x] == 0 || matrix[y][x] == 1) {
-                    count++;
-                    matrix[y][x] = 2;
-                    var grEat = new GrassEater(x, y);
-                    grassEaterArr.push(grEat);
-                }
-            }
+        if (matrix[y][x] == 0) {
+            matrix[y][x] = 2;
+            let grEat = new GrassEater(x, y);
+            grassEaterArr.push(grEat);
         }
 
-
     }
-
-    io.sockets.emit("send matrix", matrix);
 }
+
+io.sockets.emit("send matrix", matrix);
+
 function AddPredator() {
     for (var i = 0; i < 10; i++) {
         var x = Math.floor(Math.random() * matrix[0].length)
@@ -310,7 +319,7 @@ function AddPredator() {
 }
 
 function AddVochxar() {
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 15; i++) {
         var x = Math.floor(Math.random() * matrix[0].length)
         var y = Math.floor(Math.random() * matrix.length)
         if (matrix[y][x] == 0) {
@@ -323,7 +332,7 @@ function AddVochxar() {
 }
 
 function AddGayl() {
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 8; i++) {
         var x = Math.floor(Math.random() * matrix[0].length)
         var y = Math.floor(Math.random() * matrix.length)
         if (matrix[y][x] == 0) {
@@ -348,7 +357,7 @@ function AddKrak() {
     io.sockets.emit("send matrix", matrix);
 }
 function AddPajarnik() {
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 7; i++) {
         var x = Math.floor(Math.random() * matrix[0].length)
         var y = Math.floor(Math.random() * matrix.length)
         if (matrix[y][x] == 0) {
@@ -386,7 +395,7 @@ function AddXochndot() {
 }
 
 function AddBomb() {
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 5; i++) {
         var x = Math.floor(Math.random() * matrix[0].length)
         var y = Math.floor(Math.random() * matrix.length)
         if (matrix[y][x] == 0) {
@@ -401,18 +410,21 @@ function AddBomb() {
 
 io.on('connection', function (socket) {
     createObject();
-   
+    socket.on("spring", Spring);
+    socket.on("summer", Summer);
+    socket.on("autumn", Autumn);
+    socket.on("winter",Winter)
     socket.on("addGrass", AddGrass);
     socket.on("addGrassEater", AddGrassEater);
-    socket.on("addPredator",AddPredator );
+    socket.on("addPredator", AddPredator);
     socket.on("addVochxar", AddVochxar);
     socket.on("addGayl", AddGayl);
     socket.on("addKrak", AddKrak);
-    socket.on("addpajarnik", AddPajarnik);
-    socket.on("addtuyn", AddTuyn);
-    socket.on("addxochndot", AddXochndot);
-    socket.on("addbomb", AddBomb);
-    socket.on("KillAll", KillAll);
+    socket.on("addPajarnik", AddPajarnik);
+    socket.on("addTuyn", AddTuyn);
+    socket.on("addXochndot", AddXochndot);
+    socket.on("addBomb", AddBomb);
+    socket.on("Kill All",kill );
 })
 
 
