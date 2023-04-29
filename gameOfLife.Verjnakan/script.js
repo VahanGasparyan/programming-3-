@@ -23,7 +23,7 @@ socket.on("Winter", function (data) {
         weath = data;
 })
 
-var weath = "spring"
+var weath = "Spring"
 
 function changeColor(matrix) {
 
@@ -31,21 +31,24 @@ function changeColor(matrix) {
                 for (let x = 0; x < matrix[y].length; x++) {
                         var toBot = side - side * 0.2
                         textSize(toBot);
-                        //  if (matrix[y][x] = //) {
-                        //         if (weath == "spring") {
-                        //                 fill("55a630");
-                        //         } else if (weath == "summer") {
-                        //                 fill("ffd000");
-                        //         } else if (weath == "autumn") {
-                        //                 fill("a41623");
-                        //         } else if (weath == "winter") {
-                        //                 fill("#ABE0EB")
-                        //         }
-                        if (matrix[y][x] == 1) {
-                                fill("green")
+                         if (matrix[y][x] == 1) {
                                 rect(x * side, y * side, side, side)
                                 text('🌿', x * side, y * side + toBot);
-                        } else if (matrix[y][x] == 2) {
+                                if (weath == "Spring") {
+                                        fill("green");
+                                } else if (weath == "Summer") {
+                                        fill("yellow");
+                                } else if (weath == "Autumn") {
+                                        fill("orange");
+                                } else if (weath == "Winter") {
+                                        fill("lightblue")
+                                }
+                        }
+                        // if (matrix[y][x] == 1) {
+                        //         fill("green")
+                        //         rect(x * side, y * side, side, side)
+                        //         text('🌿', x * side, y * side + toBot);
+                         else if (matrix[y][x] == 2) {
                                 fill("yellow")
                                 rect(x * side, y * side, side, side)
                                 text('🦒', x * side, y * side + toBot);
@@ -84,13 +87,13 @@ function changeColor(matrix) {
                         }  else {
                                         fill("gray")
                                         rect(x * side, y * side, side, side)
-                                        text('', x * side, y * side + toBot);
+                                        // text('', x * side, y * side + toBot);
                                 }
                         }
                         
                 }
+        
         }
-
 
 
 
@@ -100,16 +103,16 @@ function changeColor(matrix) {
 
         socket.on('send matrix', changeColor)
         function Spring() {
-                socket.emit("winter");
+                socket.emit("Spring");
         }
         function Summer() {
-                socket.emit("summer");
+                socket.emit("Summer");
         }
         function Autumn() {
-                socket.emit("autumn");
+                socket.emit("Autumn");
         }
         function Winter() {
-                socket.emit("winter");
+                socket.emit("Winter");
         }
         function kill() {
                 socket.emit('killAll');
